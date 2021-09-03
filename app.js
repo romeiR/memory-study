@@ -6,6 +6,19 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var User = require('./models/user.js');
+var Score = require('./models/score.js');
+var Question = require('./models/question.js');
+var Answer = require('./models/answer.js');
+
+User.sync().then(() => {
+  Score.belongsTo(User, {foregnKey: 'scoreOf'});
+  Score.sync();
+});
+Question.sync().then(() => {
+  Answer.belongsTo(Question, {foregnKey: 'questionId'});
+  Answer.sync();
+});
 
 var app = express();
 
