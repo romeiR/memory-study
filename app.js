@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var uuid = require('uuid');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,8 +17,34 @@ User.sync().then(() => {
   Score.sync();
 });
 Question.sync().then(() => {
+  for (let w = 0; w < 10; w++) {
+    var questionId = uuid.v4();
+    var a = Math.floor(Math.random() * 100);
+    var b = Math.floor(Math.random() * 10);
+    var ab = `${a} * ${b}`;
+    Question.create({
+      questionId: questionId,
+      questionname: ab,
+      questionTen: b,
+      questionHandred: a
+    }).then((question) => {
+      console.log(question);
+    });
+  }
   Answer.belongsTo(Question, {foregnKey: 'questionId'});
-  Answer.sync();
+  Answer.sync().then(() => {
+    Question.findAll({
+      order: [['questionname','ASC']]
+    }).then((question) => {
+      var answerId = uuid.v4();
+      var answername = question.questionTen * question.questionHandred;
+      Answer.create({
+        answerId: answerId,
+        questionId: question.questionId,
+        answername: answername
+      });
+    });
+  });
 });
 
 var app = express();

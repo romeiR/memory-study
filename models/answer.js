@@ -11,7 +11,7 @@ const Answer = loader.database.define(
       allowNull: false
     },
     questionId: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.UUID,
       allowNull: false
     },
     answername: {
