@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
-
+const Question = require('../models/question');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  Question.findAll({
+    order: [['questionname','DESC']]
+  }).then(question => {
+    res.render('index', {
+      title: 'Express',
+      questions: question
+    });
+  })
 });
 
 module.exports = router;

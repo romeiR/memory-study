@@ -15,7 +15,7 @@ const Answer = loader.database.define(
       allowNull: false
     },
     answername: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false
     }
   },

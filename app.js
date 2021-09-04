@@ -17,35 +17,31 @@ User.sync().then(() => {
   Score.sync();
 });
 Question.sync().then(() => {
-  for (let w = 0; w < 10; w++) {
+  for (let i = 0; i < 10; i++) {
     var questionId = uuid.v4();
-    var a = Math.floor(Math.random() * 100);
-    var b = Math.floor(Math.random() * 10);
-    var ab = `${a} * ${b}`;
+    var handred = Math.floor(Math.random() * 100);
+    var ten = Math.floor(Math.random() * 10);
+    var handredTen = `${handred} * ${ten}`;
+    var handredTens = handred * ten;
     Question.create({
-      questionId: questionId,
-      questionname: ab,
-      questionTen: b,
-      questionHandred: a
-    }).then((question) => {
-      console.log(question);
+      questionid: questionId,
+      questionname: handredTen,
+      questionhandred: handred,
+      questionten: ten,
+      questionanswer: handredTen
     });
-  }
-  Answer.belongsTo(Question, {foregnKey: 'questionId'});
-  Answer.sync().then(() => {
-    Question.findAll({
-      order: [['questionname','ASC']]
-    }).then((question) => {
-      var answerId = uuid.v4();
-      var answername = question.questionTen * question.questionHandred;
-      Answer.create({
-        answerId: answerId,
-        questionId: question.questionId,
-        answername: answername
-      });
-    });
+  };
+  Answer.belongsTo(Question, {foregnKey: 'questionid'});
+  Answer.sync();
+}).then(() => {
+  Question.findAll({
+    order: [['questionname','DESC']]
+  }).then((question) => {
+    console.log(question.questionname);
+    console.log("こんにちは");
   });
 });
+
 
 var app = express();
 
@@ -79,3 +75,15 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+/*.then((qustion) => {
+  var answerId = uuid.v4();
+  var answername = question.questionHandred * question.questionTen;
+  Answer.create({
+    answerId: answerId,
+    questionId: question.questionId,
+    answername: answername
+  });
+});*/
+

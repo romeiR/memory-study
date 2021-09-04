@@ -5,9 +5,8 @@ const Sequelize = loader.Sequelize;
 const Question = loader.database.define(
   'questions',
   {
-    questionId: {
+    questionid: {
       type: Sequelize.UUID,
-      autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
@@ -15,14 +14,22 @@ const Question = loader.database.define(
       type: Sequelize.STRING,
       allowNull: false
     },
-    questionTen: {
+    questionten: {
       type: Sequelize.INTEGER,
       allowNull: false
     },
-    questionHandred: {
+    questionhandred: {
       type: Sequelize.INTEGER,
       allowNull: false
+    },
+    questionanswer: {
+      type: Sequelize.STRING,
+      allowNull: false
     }
+  },
+  {
+    freezeTableName: true,
+    timestamps: false
   }
 );
 

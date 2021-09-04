@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  table.table
+    tr
+      th 問題ID 
+      th 問題URL
+      each question in questions
+        tr 
+          td #{question.questionid}
+          td 
+            a(href=`/questions/${question.questionid}`) 問題URL
