@@ -10,7 +10,7 @@ router.get('/:questionid', (req,res,next) =>{
     },
     order: [['questionname', 'ASC']]
   }).then((question) => {
-    console.log(question.questionname);
+    console.log(question.questionanswer);
     res.render('question', {
       questions: question
     });

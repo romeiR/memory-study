@@ -29,7 +29,7 @@ Question.sync().then(() => {
       questionname: handredTen,
       questionhandred: handred,
       questionten: ten,
-      questionanswer: handredTen
+      questionanswer: handredTens
     });
   };
   Answer.belongsTo(Question, {foregnKey: 'questionid'});
