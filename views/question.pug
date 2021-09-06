@@ -4,3 +4,10 @@ block content
   h1 問題
   h2 #{questions.questionname}
   h3 #{questions.questionanswer}
+  form(action=`/questions/${questionid}`, method="post") 
+    div 
+      h3 答えを入力
+      input(type="text" name="questionanswer")
+    button(type="submit") 答える
+  if (questionanswer)
+    h3 #{questionanswer}

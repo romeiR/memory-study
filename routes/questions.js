@@ -17,4 +17,17 @@ router.get('/:questionid', (req,res,next) =>{
   });
 });
 
+router.post(`/:questionid`, function(req,res,next) {
+  Question.findOne({
+    where: {
+      questionid: req.params.questionid
+    },
+    order: [['questionname', 'ASC']]
+  }).then((question) => {
+    res.render('question',{
+      questions: question,
+      questionanswer: req.body
+    });
+  })
+});
 module.exports = router;

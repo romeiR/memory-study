@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
       title: 'Express',
       questions: question
     });
-    res.render('../public/javascripts/test');
   })
 });
-
 
 module.exports = router;
